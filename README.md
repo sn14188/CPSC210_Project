@@ -11,5 +11,13 @@ they can score by *catching foods* that fall randomly as well. There are three t
 food, and if you make it continue to eat the same type of them, you can get a combo score. When
 the squirrel get rained a lot, it will get sick and the game ends. <br> <br>
 I could first think of my behaviour not to step on the puddles when it rains. Then I came up with
-this type of game.
+this type of game. <br> <br>
+
+> ## User Stories
+>- As a user, I want to adjust the direction of the squirrel.
+>- As a user, I want to score by allowing the squirrel to catch food that falls randomly.
+>- As a user, I want to receive additional points by allowing the squirrel to continue to catch the
+   > same food.
+>- As a user, I want to view my score on the screen.
+>- As a user, I want to end the game by making the squirrel touch raindrops more than three times.
 
