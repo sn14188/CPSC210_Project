@@ -20,4 +20,3 @@ this type of game. <br> <br>
    > same food.
 >- As a user, I want to view my score on the screen.
 >- As a user, I want to end the game by making the squirrel touch raindrops more than three times.
-
