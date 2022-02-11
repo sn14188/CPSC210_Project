@@ -17,7 +17,7 @@ class PoopTest {
     }
 
     @Test
-    void movePoop() {
+    void testMovePoop() {
         // move poop's position by DY units
         poop.movePoop();
         assertEquals(poopX, poop.getPoopX());
@@ -31,8 +31,8 @@ class PoopTest {
     }
 
     @Test
-    void getLocation() {
-        assertEquals("(" + poop.getPoopX() + ", " + poop.getPoopY() + ")",
-                poop.getLocation());
+    void testGetLocation() {
+        // returns poop's coordinates
+        assertEquals("(" + poopX + ", " + poopY + ")", poop.getLocation());
     }
 }

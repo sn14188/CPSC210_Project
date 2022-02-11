@@ -55,6 +55,7 @@ class PlayerTest {
 
     @Test
     void testGetLocation() {
+        // returns player's coordinates
         assertEquals("(4, 9)", player.getLocation());
     }
 }
