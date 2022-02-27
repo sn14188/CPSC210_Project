@@ -19,3 +19,6 @@ This reminded me of a mobile game **avoid poop falling from the sky** that I use
 >- As a user, I want to see where poop instances are in the field.
 >- As a user, I want to view my score on the console.
 >- As a user, I want the game to end when I am hit by poop.
+>- As a user, I want to be able to save the position of the player.
+>- As a user, I want to be able to save the position of poop instances.
+>- As a user, I want to be able to save my score.
