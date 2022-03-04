@@ -31,8 +31,8 @@ class PoopTest {
     }
 
     @Test
-    void testGetLocation() {
+    void testGetStringLocation() {
         // returns poop's coordinates
-        assertEquals("(" + poopX + ", " + poopY + ")", poop.getLocation());
+        assertEquals("(" + poopX + ", " + poopY + ")", poop.getStringLocation());
     }
 }

@@ -17,18 +17,14 @@ public class Poop {
         this.poopY = 0;
     }
 
-    // EFFECTS: returns poop's x coordinates
     public int getPoopX() {
         return poopX;
     }
 
-    // EFFECTS: returns poop's y coordinates
     public int getPoopY() {
         return poopY;
     }
 
-    // MODIFIES: this
-    // EFFECTS: sets poop's y coordinates
     public void setPoopY(int poopY) {
         this.poopY = poopY;
     }
@@ -39,8 +35,8 @@ public class Poop {
         this.setPoopY(this.getPoopY() + DY);
     }
 
-    // EFFECTS: returns poop's coordinates
-    public String getLocation() {
+    // EFFECTS: returns string representation of poop's coordinates
+    public String getStringLocation() {
         return "(" + this.getPoopX() + ", " + this.getPoopY() + ")";
     }
 }

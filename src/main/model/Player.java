@@ -1,6 +1,6 @@
 package model;
 
-import ui.APGame;
+import ui.AvoidPoopGame;
 
 public class Player {
     // Constants: player's y coordinates = 0
@@ -9,24 +9,20 @@ public class Player {
     private int playerY;
 
     // Constructs a player
-    // EFFECTS: a player is positioned at coordinates (x, y)
+    // EFFECTS: a player is positioned at coordinates (4, 9)
     public Player() {
         this.playerX = 4;
         this.playerY = 9;
     }
 
-    // EFFECTS: returns player's x coordinates
     public int getPlayerX() {
         return playerX;
     }
 
-    // EFFECTS: returns player's y coordinates
     public int getPlayerY() {
         return playerY;
     }
 
-    // MODIFIES: this
-    // EFFECTS: sets player's x coordinates
     public void setPlayerX(int playerX) {
         this.playerX = playerX;
     }
@@ -44,15 +40,15 @@ public class Player {
     // MODIFIES: this
     // EFFECTS: updates the player's x position to the right
     public void moveRight() {
-        if (playerX >= APGame.WIDTH) {
-            playerX = APGame.WIDTH;
+        if (playerX >= AvoidPoopGame.WIDTH) {
+            playerX = AvoidPoopGame.WIDTH;
         } else {
             this.setPlayerX(this.playerX + 1);
         }
     }
 
-    // EFFECTS: returns player's coordinates
-    public String getLocation() {
+    // EFFECTS: returns string representation of player's coordinates
+    public String getStringLocation() {
         return "(" + this.getPlayerX() + ", " + this.getPlayerY() + ")";
     }
 }
