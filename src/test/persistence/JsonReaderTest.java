@@ -2,14 +2,12 @@
 
 package persistence;
 
-import model.Score;
 import model.ScoreRecord;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
-import java.util.*;
 
 class JsonReaderTest {
 

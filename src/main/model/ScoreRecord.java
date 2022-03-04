@@ -6,10 +6,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
-// Represents a score records
+// Represents score records
 public class ScoreRecord {
     private ArrayList<Score> scores;
 
@@ -28,13 +26,14 @@ public class ScoreRecord {
         return scores;
     }
 
+    // EFFECTS: returns this as JSON object
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("Scores", scoreRecordToJson());
         return json;
     }
 
-    // EFFECTS: returns scores as a JSON array
+    // EFFECTS: returns scores as JSON array
     private JSONArray scoreRecordToJson() {
         JSONArray jsonArray = new JSONArray();
         for (Score score : scores) {
@@ -42,5 +41,4 @@ public class ScoreRecord {
         }
         return jsonArray;
     }
-
 }

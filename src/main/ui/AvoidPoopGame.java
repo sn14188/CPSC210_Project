@@ -46,15 +46,14 @@ public class AvoidPoopGame {
                 movePlayer();
                 movePoops();
             }
-
             printResults();
             saveScore();
-
-            displayMenu();
+            displayOption();
             String command = input.next();
             command = command.toLowerCase();
             processCommand(command);
         }
+
         loadScoreRecord();
         for (Score s : scoreRecord.getScoreRecords()) {
             System.out.println(s);
@@ -79,23 +78,26 @@ public class AvoidPoopGame {
         }
     }
 
-    private void displayMenu() {
+    // EFFECTS: displays options to user
+    private void displayOption() {
         System.out.println("\nSelect:");
-        System.out.println("\tr -> Play again");
         System.out.println("\ts -> Save score and quit");
+        System.out.println("\tr -> Save score and replay");
         System.out.println("\tAny other keys -> Quit without saving");
     }
 
+    // MODIFIES: this
+    // EFFECTS: processes user command
     private void processCommand(String command) {
-        if (command.equals("S") || command.equals("s")) {
+        if (command.equals("S") || command.equals("s")) { // saves the records and program ends
             saveScoreRecord();
             gameOver = true;
         }
-        if (command.equals("R") || command.equals("r")) {
+        if (command.equals("R") || command.equals("r")) { // saves the records and keep playing
             pooped = false;
             turn = 0;
         }
-        if (!(command.equals("R") || command.equals("r"))) {
+        if (!(command.equals("R") || command.equals("r"))) { // program ends without saving
             gameOver = true;
         }
     }
@@ -161,25 +163,18 @@ public class AvoidPoopGame {
     // EFFECTS: prints the game result
     private void printResults() {
         System.out.println("Game over. You've been pooped.");
-        System.out.println("Your score: " + turn);
+        System.out.println("- Your score: " + turn);
     }
 
-    private void printScoreRecords() {
-        ArrayList<Score> scores = scoreRecord.getScoreRecords();
-        for (Score s : scores) {
-            System.out.println(s);
-        }
-    }
-
+    // EFFECTS: prompts user to input his/her name and saves the score
     private void saveScore() {
         input = new Scanner(System.in);
-        System.out.println("Input your name: ");
+        System.out.println("- Input your name: ");
         String name = input.next();
         scoreRecord.addScore(new Score(name, turn));
     }
 
-
-
+    // EFFECTS: saves the score record to file
     private void saveScoreRecord() {
         try {
             jsonWriter.open();

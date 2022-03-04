@@ -2,11 +2,12 @@
 
 package persistence;
 
-import model.ScoreRecord;
-import org.json.JSONObject;
+import model.*;
 
 import java.io.*;
+import org.json.JSONObject;
 
+// Represents a writer that writes JSON representation of score record to file
 public class JsonWriter {
     private PrintWriter writer;
     private String destination;
@@ -17,11 +18,14 @@ public class JsonWriter {
     }
 
     // MODIFIES: this
-    // EFFECTS: opens writer
+    // EFFECTS: opens writer; throws FileNotFoundException if destination file cannot
+    // be opened for writing
     public void open() throws FileNotFoundException {
         writer = new PrintWriter((destination));
     }
 
+    // MODIFIES: this
+    // EFFECTS: writes JSON representation of score record to file
     public void write(ScoreRecord scoreRecord) {
         JSONObject json = scoreRecord.toJson();
         saveToFile(json.toString(4));
