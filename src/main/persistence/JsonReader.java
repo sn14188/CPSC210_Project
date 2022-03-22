@@ -41,13 +41,13 @@ public class JsonReader {
     // EFFECTS: parses score record from JSON object and returns it
     private ScoreRecord parseScoreRecord(JSONObject jsonObject) {
         ScoreRecord scoreRecord = new ScoreRecord();
-        addScores(scoreRecord, jsonObject);
+        addScoreRecord(scoreRecord, jsonObject);
         return scoreRecord;
     }
 
     // MODIFIES: scoreRecord
     // EFFECTS: parses from JSON object and adds them to score record
-    private void addScores(ScoreRecord scoreRecord, JSONObject jsonObject) {
+    private void addScoreRecord(ScoreRecord scoreRecord, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("Scores");
         for (Object json : jsonArray) {
             JSONObject nextScore = (JSONObject) json;

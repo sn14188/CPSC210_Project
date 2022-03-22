@@ -19,5 +19,5 @@ This reminded me of a mobile game **avoid poop falling from the sky** that I use
 >- As a user, I want to see where poop instances are in the field.
 >- As a user, I want to view my score on the console.
 >- As a user, I want the game to end when I'm hit by poop.
->- As a user, I want to provide an input play again or save my scores and quit.
+>- As a user, I want to provide an input save my scores and quit.
 >- As a user, I want to be able to see the saved scores.

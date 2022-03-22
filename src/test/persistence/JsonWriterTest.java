@@ -35,7 +35,7 @@ class JsonWriterTest extends JsonTest {
 
             JsonReader reader = new JsonReader("./data/testWriterEmptyScoreRecord.json");
             scoreRecord = reader.read();
-            assertEquals(0, scoreRecord.getScoreRecords().size());
+            assertEquals(0, scoreRecord.getScoreRecord().size());
         } catch (IOException e) {
             fail("Exception should not have been thrown");
         }
@@ -54,7 +54,7 @@ class JsonWriterTest extends JsonTest {
 
             JsonReader reader = new JsonReader("./data/testWriterGeneralScoreRecord.json");
             scoreRecord = reader.read();
-            List<Score> scores = scoreRecord.getScoreRecords();
+            List<Score> scores = scoreRecord.getScoreRecord();
             assertEquals(2, scores.size());
             checkScore("Kelly", 10, scores.get(0));
             checkScore("Rena", 5, scores.get(1));

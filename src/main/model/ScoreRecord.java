@@ -22,7 +22,7 @@ public class ScoreRecord {
         scores.add(score);
     }
 
-    public ArrayList<Score> getScoreRecords() {
+    public ArrayList<Score> getScoreRecord() {
         return scores;
     }
 

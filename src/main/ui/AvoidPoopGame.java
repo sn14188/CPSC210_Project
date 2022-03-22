@@ -13,11 +13,9 @@ import java.util.Scanner;
 
 // Represents avoid poop game
 public class AvoidPoopGame {
-    public static final int WIDTH = 9; // Horizontal size of field
-    public static final int HEIGHT = 9; // Vertical size of field
-
+    public static final int WIDTH = 9; // horizontal size of field
+    public static final int HEIGHT = 9; // vertical size of field
     private int turn = 0; // turn count
-    private boolean pooped = false; // false until the player's hit by poop
     private boolean gameOver = false; // false until the game is over
 
     private Scanner input; // for user input
@@ -26,80 +24,83 @@ public class AvoidPoopGame {
     private ArrayList<Poop> poops; // list storing poop instances
 
     // Data persistence
-    public static final String JSON_STORE = "./data/record.json";
+    private static final String JSON_STORE = "./data/record.json";
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
-    private ScoreRecord scoreRecord = new ScoreRecord();
+    private ScoreRecord scoreRecord;
 
     // EFFECTS: constructs a game
     public AvoidPoopGame() {
+        scoreRecord = new ScoreRecord();
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
 
+        startGame();
         while (!(gameOver)) {
-            startGame();
-            while (!(pooped)) {
-                turnIncreaseAndPrint();
-                addPoop();
-                printPoops();
-                printPlayer();
-                movePlayer();
-                movePoops();
-            }
-            printResults();
-            saveScore();
-            displayOption();
-            String command = input.next();
-            command = command.toLowerCase();
-            processCommand(command);
+            turnIncreaseAndPrint();
+            addPoop();
+            printPoops();
+            printPlayer();
+            movePlayer();
+            movePoops();
         }
 
-        loadScoreRecord();
-        for (Score s : scoreRecord.getScoreRecords()) {
-            System.out.println(s);
-        }
+        printResults();
+        saveScoreWithName();
+        displayGameEndMenu();
+
+        String command = input.next();
+        command = command.toLowerCase();
+        processCommand(command);
     }
 
     // EFFECTS: starts a game and instantiates player and poop list when pressing s key, otherwise terminates
     private void startGame() {
-        Boolean gameStarted = false;
-        System.out.println("Press S to start game.");
+        boolean gameStarted = false;
+        displayGameStartMenu();
+
+        String command = null;
+        input = new Scanner(System.in);
 
         while (gameStarted == false) {
-            input = new Scanner(System.in);
-            String start = input.next();
-            if (start.equals("S") || start.equals("s")) {
+            command = input.next();
+            if (command.equals("s") || command.equals("S")) {
                 gameStarted = true;
                 player = new Player();
-                poops = new ArrayList<Poop>();
+                poops = new ArrayList<>();
+            } else if (command.equals("l") || command.equals("L")) {
+                loadScoreRecord();
+                for (Score s : scoreRecord.getScoreRecord()) {
+                    System.out.println(s);
+                }
+                displayGameStartMenu();
             } else {
-                System.out.println("Invalid key. Please press S to start game.");
+                System.out.println("Invalid key please select s or l");
             }
         }
     }
 
-    // EFFECTS: displays options to user
-    private void displayOption() {
+    // EFFECTS: displays options to user upon start
+    private void displayGameStartMenu() {
         System.out.println("\nSelect:");
-        System.out.println("\ts -> Save score and quit");
-        System.out.println("\tr -> Save score and replay");
+        System.out.println("\ts -> Start a game");
+        System.out.println("\tl -> Load the score record from file");
+    }
+
+    // EFFECTS: displays options to user upon end
+    private void displayGameEndMenu() {
+        System.out.println("\nSelect:");
+        System.out.println("\ts -> Save score to file and quit");
         System.out.println("\tAny other keys -> Quit without saving");
     }
 
     // MODIFIES: this
     // EFFECTS: processes user command
     private void processCommand(String command) {
-        if (command.equals("S") || command.equals("s")) { // saves the records and program ends
+        if (command.equals("s") || command.equals("S")) { // saves the records
             saveScoreRecord();
-            gameOver = true;
         }
-        if (command.equals("R") || command.equals("r")) { // saves the records and keep playing
-            pooped = false;
-            turn = 0;
-        }
-        if (!(command.equals("R") || command.equals("r"))) { // program ends without saving
-            gameOver = true;
-        }
+        gameOver = true; // game ends
     }
 
     // MODIFIES: this
@@ -141,7 +142,7 @@ public class AvoidPoopGame {
                 poopToRemove = poop;
             }
             if (poop.getStringLocation().equals(player.getStringLocation())) {
-                this.pooped = true;
+                this.gameOver = true;
             }
         }
         poops.remove(poopToRemove);
@@ -166,8 +167,8 @@ public class AvoidPoopGame {
         System.out.println("- Your score: " + turn);
     }
 
-    // EFFECTS: prompts user to input his/her name and saves the score
-    private void saveScore() {
+    // EFFECTS: prompts user to input name and saves the score
+    private void saveScoreWithName() {
         input = new Scanner(System.in);
         System.out.println("- Input your name: ");
         String name = input.next();
@@ -180,7 +181,7 @@ public class AvoidPoopGame {
             jsonWriter.open();
             jsonWriter.write(scoreRecord);
             jsonWriter.close();
-            System.out.println("Saved to " + JSON_STORE);
+            System.out.println("Saved to: " + JSON_STORE);
         } catch (FileNotFoundException e) {
             System.out.println("Unable to write to file: " + JSON_STORE);
         }

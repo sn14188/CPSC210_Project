@@ -27,8 +27,8 @@ class JsonReaderTest {
         JsonReader reader = new JsonReader("./data/testReaderScoreRecord.json");
         try {
             ScoreRecord scoreRecord = reader.read();
-            assertEquals("Aiden", scoreRecord.getScoreRecords().get(0).getName());
-            assertEquals(100, scoreRecord.getScoreRecords().get(0).getScore());
+            assertEquals("Aiden", scoreRecord.getScoreRecord().get(0).getName());
+            assertEquals(100, scoreRecord.getScoreRecord().get(0).getScore());
         } catch (IOException e) {
             fail("Couldn't read from file");
         }
