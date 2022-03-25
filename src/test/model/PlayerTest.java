@@ -44,14 +44,14 @@ class PlayerTest {
         player.moveRight();
         assertEquals(280, player.getPlayerX());
 
-        // boundary case: 8 to 9
-        player.setPlayerX(8);
+        // boundary case: 290 to 300
+        player.setPlayerX(290);
         player.moveRight();
-        assertEquals(18, player.getPlayerX());
+        assertEquals(300, player.getPlayerX());
 
         // when x = 9, cannot go further to the right
         player.moveRight();
-        assertEquals(28, player.getPlayerX());
+        assertEquals(300, player.getPlayerX());
     }
 
     @Test

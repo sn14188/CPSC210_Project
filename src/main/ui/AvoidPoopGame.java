@@ -110,8 +110,8 @@ public class AvoidPoopGame {
 
     // EFFECTS: prompts user to input name and saves the score
     public void saveScoreWithName() {
-        input = new Scanner(System.in);
         System.out.println("Input your name: ");
+        input = new Scanner(System.in);
         String name = input.next();
         scoreRecord.addScore(new Score(name, turnCount));
     }

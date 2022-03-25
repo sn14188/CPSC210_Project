@@ -17,7 +17,11 @@ This reminded me of a mobile game **avoid poop falling from the sky** that I use
 >- As a user, I want to change the position of the player.
 >- As a user, I want to see the player's location each turn.
 >- As a user, I want to see where poop instances are in the field.
->- As a user, I want to view my score on the console.
+>- As a user, I want to view my score on GUI.
 >- As a user, I want the game to end when I'm hit by poop.
 >- As a user, I want to provide an input save my scores and quit.
 >- As a user, I want to be able to see the saved scores.
+>- As a user, I want to be able to click buttons to start a game or load the score record.
+>- As a user, I want to be able to increase my score until the player object is hit by a poop object.
+>- As a user, I want to be able to see my current score as the game is running.
+>- As a user, I want to be prompted with the option to save my score at the end of the game.
