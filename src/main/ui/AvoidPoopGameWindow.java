@@ -80,7 +80,6 @@ public class AvoidPoopGameWindow extends JFrame {
                 avoidPoopGame.nextGameState();
                 gamePanel.repaint();
                 scorePanel.update();
-                avoidPoopGame.turnCount++;
                 if (avoidPoopGame.isGameOver()) {
                     timer.stop();
                 }

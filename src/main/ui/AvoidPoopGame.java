@@ -17,7 +17,7 @@ public class AvoidPoopGame {
 
     private Player player;
     private ArrayList<Poop> poops;
-    public int turnCount; // turn count
+    private int turnCount; // turn count
     private boolean gameOver = false; // false until the game is over
     private Scanner input;
 
@@ -59,6 +59,7 @@ public class AvoidPoopGame {
     public void nextGameState() {
         movePoops();
         addPoop();
+        turnCount++;
     }
 
     // MODIFIES: this, Poop
