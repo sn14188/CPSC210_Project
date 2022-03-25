@@ -1,5 +1,3 @@
-// Work cited: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
-
 package model;
 
 import org.json.JSONObject;

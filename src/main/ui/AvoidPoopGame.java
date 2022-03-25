@@ -1,11 +1,10 @@
-// Work cited: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
-
 package ui;
 
 import model.*;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
+import java.awt.event.KeyEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,21 +12,20 @@ import java.util.Scanner;
 
 // Represents avoid poop game
 public class AvoidPoopGame {
-    public static final int WIDTH = 9; // horizontal size of field
-    public static final int HEIGHT = 9; // vertical size of field
-    private int turn = 0; // turn count
+    public static final int WIDTH = 300; // horizontal size of field
+    public static final int HEIGHT = 500; // vertical size of field
+
+    private Player player;
+    private ArrayList<Poop> poops;
+    public int turnCount; // turn count
     private boolean gameOver = false; // false until the game is over
-
-    private Scanner input; // for user input
-
-    private Player player; // variable declaration
-    private ArrayList<Poop> poops; // list storing poop instances
+    private Scanner input;
 
     // Data persistence
+    private ScoreRecord scoreRecord;
     private static final String JSON_STORE = "./data/record.json";
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
-    private ScoreRecord scoreRecord;
 
     // EFFECTS: constructs a game
     public AvoidPoopGame() {
@@ -35,79 +33,44 @@ public class AvoidPoopGame {
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
 
-        startGame();
-        while (!(gameOver)) {
-            turnIncreaseAndPrint();
-            addPoop();
-            printPoops();
-            printPlayer();
-            movePlayer();
-            movePoops();
-        }
-
-        printResults();
-        saveScoreWithName();
-        displayGameEndMenu();
-
-        String command = input.next();
-        command = command.toLowerCase();
-        processCommand(command);
+        player = new Player(250);
+        poops = new ArrayList<>();
+        turnCount = 0;
     }
 
-    // EFFECTS: starts a game and instantiates player and poop list when pressing s key, otherwise terminates
-    private void startGame() {
-        boolean gameStarted = false;
-        displayGameStartMenu();
+    public Player getPlayer() {
+        return player;
+    }
 
-        String command = null;
-        input = new Scanner(System.in);
+    public ArrayList<Poop> getPoops() {
+        return poops;
+    }
 
-        while (gameStarted == false) {
-            command = input.next();
-            if (command.equals("s") || command.equals("S")) {
-                gameStarted = true;
-                player = new Player();
-                poops = new ArrayList<>();
-            } else if (command.equals("l") || command.equals("L")) {
-                loadScoreRecord();
-                for (Score s : scoreRecord.getScoreRecord()) {
-                    System.out.println(s);
-                }
-                displayGameStartMenu();
-            } else {
-                System.out.println("Invalid key please select s or l");
+    public int getTurnCount() {
+        return turnCount;
+    }
+
+    public boolean isGameOver() {
+        return gameOver;
+    }
+
+    // MODIFIES: this
+    // EFFECTS: updates the game state
+    public void nextGameState() {
+        movePoops();
+        addPoop();
+    }
+
+    // MODIFIES: this, Poop
+    // EFFECTS: moves poop
+    //          if one of poop's coordinates are same as players', the game is over
+    private void movePoops() {
+        for (Poop poop : poops) {
+            poop.movePoop();
+            if (poop.getPoopX() == player.getPlayerX() && poop.getPoopY() == player.getPlayerY()) {
+                gameOver = true;
             }
         }
-    }
-
-    // EFFECTS: displays options to user upon start
-    private void displayGameStartMenu() {
-        System.out.println("\nSelect:");
-        System.out.println("\ts -> Start a game");
-        System.out.println("\tl -> Load the score record from file");
-    }
-
-    // EFFECTS: displays options to user upon end
-    private void displayGameEndMenu() {
-        System.out.println("\nSelect:");
-        System.out.println("\ts -> Save score to file and quit");
-        System.out.println("\tAny other keys -> Quit without saving");
-    }
-
-    // MODIFIES: this
-    // EFFECTS: processes user command
-    private void processCommand(String command) {
-        if (command.equals("s") || command.equals("S")) { // saves the records
-            saveScoreRecord();
-        }
-        gameOver = true; // game ends
-    }
-
-    // MODIFIES: this
-    // EFFECTS: increases and prints the turn count
-    private void turnIncreaseAndPrint() {
-        turn++;
-        System.out.println(" *** Turn " + turn + " ***");
     }
 
     // MODIFIES: this
@@ -116,67 +79,23 @@ public class AvoidPoopGame {
         poops.add(new Poop());
     }
 
-    // EFFECTS: prints the list of poops' locations
-    private void printPoops() {
-        System.out.print("\tPoop: ");
-        for (Poop poop : poops) {
-            System.out.print(poop.getStringLocation() + " ");
-        }
-        System.out.println(); // for space
-    }
-
-    // EFFECTS: prints the player's location
-    private void printPlayer() {
-        System.out.println("\tPlayer: " + player.getStringLocation());
-    }
-
-    // MODIFIES: this, Poop
-    // EFFECTS: moves poop
-    //          if out of field, it's eliminated
-    //          if one of poop's coordinates are same as players', the game is over
-    private void movePoops() {
-        Poop poopToRemove = null;
-        for (Poop poop : poops) {
-            poop.movePoop();
-            if (poop.getPoopY() > HEIGHT) {
-                poopToRemove = poop;
-            }
-            if (poop.getStringLocation().equals(player.getStringLocation())) {
-                this.gameOver = true;
-            }
-        }
-        poops.remove(poopToRemove);
-    }
-
-    // MODIFIES: this, Player
-    // EFFECTS: asks the user for the next move
-    //          moves accordingly or stays otherwise
-    private void movePlayer() {
-        System.out.println("\nPress L to move left, or R to move right.");
-        String move = input.next();
-        if (move.equals("L") || move.equals("l")) {
+    // MODIFIES: this
+    // EFFECTS: take the key events and accepts accordingly
+    public void keyEventHandling(int keyCode) {
+        if (keyCode == KeyEvent.VK_KP_LEFT || keyCode == KeyEvent.VK_LEFT) {
             player.moveLeft();
-        } else if (move.equals("R") || move.equals("r")) {
+        } else if (keyCode == KeyEvent.VK_KP_RIGHT || keyCode == KeyEvent.VK_RIGHT) {
             player.moveRight();
+        } else if (keyCode == KeyEvent.VK_S) {
+            saveScoreRecord();
+        } else if (keyCode == KeyEvent.VK_X) {
+            System.exit(0);
         }
-    }
-
-    // EFFECTS: prints the game result
-    private void printResults() {
-        System.out.println("Game over. You've been pooped.");
-        System.out.println("- Your score: " + turn);
-    }
-
-    // EFFECTS: prompts user to input name and saves the score
-    private void saveScoreWithName() {
-        input = new Scanner(System.in);
-        System.out.println("- Input your name: ");
-        String name = input.next();
-        scoreRecord.addScore(new Score(name, turn));
     }
 
     // EFFECTS: saves the score record to file
-    private void saveScoreRecord() {
+    public void saveScoreRecord() {
+        saveScoreWithName();
         try {
             jsonWriter.open();
             jsonWriter.write(scoreRecord);
@@ -185,11 +104,20 @@ public class AvoidPoopGame {
         } catch (FileNotFoundException e) {
             System.out.println("Unable to write to file: " + JSON_STORE);
         }
+        System.exit(0);
+    }
+
+    // EFFECTS: prompts user to input name and saves the score
+    public void saveScoreWithName() {
+        input = new Scanner(System.in);
+        System.out.println("Input your name: ");
+        String name = input.next();
+        scoreRecord.addScore(new Score(name, turnCount));
     }
 
     // MODIFIES: this
     // EFFECTS: loads score record from file
-    private void loadScoreRecord() {
+    public void loadScoreRecord() {
         try {
             scoreRecord = jsonReader.read();
         } catch (IOException e) {

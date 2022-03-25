@@ -9,21 +9,22 @@ class PlayerTest {
 
     @BeforeEach
     void setup() {
-        player = new Player();
+        player = new Player(250);
     }
 
     @Test
     void testMoveLeft() {
         // updates the player's x position to the left
         player.moveLeft();
-        assertEquals(3, player.getPlayerX());
+        assertEquals(240, player.getPlayerX());
 
         // move 2 to the left
         player.moveLeft();
         player.moveLeft();
-        assertEquals(1, player.getPlayerX());
+        assertEquals(220, player.getPlayerX());
 
         // boundary case: 1 to 0
+        player.setPlayerX(10);
         player.moveLeft();
         assertEquals(0, player.getPlayerX());
 
@@ -36,26 +37,26 @@ class PlayerTest {
     void testMoveRight() {
         // updates the player's x position to the right
         player.moveRight();
-        assertEquals(5, player.getPlayerX());
+        assertEquals(260, player.getPlayerX());
 
         // move 2 to the right
         player.moveRight();
         player.moveRight();
-        assertEquals(7, player.getPlayerX());
+        assertEquals(280, player.getPlayerX());
 
         // boundary case: 8 to 9
         player.setPlayerX(8);
         player.moveRight();
-        assertEquals(9, player.getPlayerX());
+        assertEquals(18, player.getPlayerX());
 
         // when x = 9, cannot go further to the right
         player.moveRight();
-        assertEquals(9, player.getPlayerX());
+        assertEquals(28, player.getPlayerX());
     }
 
     @Test
     void testGetStringLocation() {
         // returns player's coordinates
-        assertEquals("(4, 9)", player.getStringLocation());
+        assertEquals("(250, 470)", player.getStringLocation());
     }
 }

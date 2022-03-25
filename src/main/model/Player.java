@@ -2,17 +2,23 @@ package model;
 
 import ui.AvoidPoopGame;
 
+import java.awt.*;
+
 public class Player {
-    // Constants: player's y coordinates = 0
+    // Constants: player's y coordinates
     // Changing information: player's x coordinates
     private int playerX;
     private int playerY;
 
+    public static final int PLAYER_SIZE_X = 20;
+    public static final int PLAYER_SIZE_Y = 20;
+    public static final Color COLOR = new Color(0, 100, 200);
+
     // Constructs a player
-    // EFFECTS: a player is positioned at coordinates (4, 9)
-    public Player() {
-        this.playerX = 4;
-        this.playerY = 9;
+    // EFFECTS: a player is positioned at coordinates
+    public Player(int playerX) {
+        this.playerX = playerX;
+        this.playerY = AvoidPoopGame.HEIGHT - 30;
     }
 
     public int getPlayerX() {
@@ -33,7 +39,7 @@ public class Player {
         if (playerX <= 0) {
             playerX = 0;
         } else {
-            this.setPlayerX(this.playerX - 1);
+            this.setPlayerX(this.playerX - 10);
         }
     }
 
@@ -43,7 +49,7 @@ public class Player {
         if (playerX >= AvoidPoopGame.WIDTH) {
             playerX = AvoidPoopGame.WIDTH;
         } else {
-            this.setPlayerX(this.playerX + 1);
+            this.setPlayerX(this.playerX + 10);
         }
     }
 

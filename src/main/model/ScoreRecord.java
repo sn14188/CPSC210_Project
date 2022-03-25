@@ -1,5 +1,3 @@
-// Work cited: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
-
 package model;
 
 import org.json.JSONArray;
@@ -34,7 +32,7 @@ public class ScoreRecord {
     }
 
     // EFFECTS: returns scores as JSON array
-    private JSONArray scoreRecordToJson() {
+    public JSONArray scoreRecordToJson() {
         JSONArray jsonArray = new JSONArray();
         for (Score score : scores) {
             jsonArray.put(score.toJson());

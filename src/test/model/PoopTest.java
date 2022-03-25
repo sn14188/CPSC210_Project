@@ -21,13 +21,13 @@ class PoopTest {
         // move poop's position by DY units
         poop.movePoop();
         assertEquals(poopX, poop.getPoopX());
-        assertEquals(poopY, poop.getPoopY() - 1);
+        assertEquals(50, poop.getPoopY() + Poop.POOP_DY);
 
         // move 2 times
         poop.movePoop();
         poop.movePoop();
         assertEquals(poopX, poop.getPoopX());
-        assertEquals(poopY, poop.getPoopY() - 3);
+        assertEquals(110, poop.getPoopY() + Poop.POOP_DY * 2);
     }
 
     @Test
