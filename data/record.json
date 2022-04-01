@@ -1,7 +1,13 @@
 {
     "name": "Avoid Poop Game Score Record",
-    "Scores": [{
-        "score": 231,
-        "name": "Aiden"
-    }]
+    "Scores": [
+        {
+            "score": 231,
+            "name": "Aiden"
+        },
+        {
+            "score": 26,
+            "name": "Test"
+        }
+    ]
 }

@@ -1,8 +1,12 @@
 package ui;
 
-import model.*;
+import model.Player;
+import model.Poop;
+import model.Score;
 import persistence.JsonReader;
 import persistence.JsonWriter;
+import model.Event;
+import model.EventLog;
 
 import java.awt.event.KeyEvent;
 import java.io.FileNotFoundException;
@@ -27,6 +31,8 @@ public class AvoidPoopGame {
 
     // EFFECTS: constructs a game
     public AvoidPoopGame() {
+        EventLog.getInstance().clear();
+
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
 

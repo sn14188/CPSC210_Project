@@ -3,7 +3,6 @@
 
 package ui;
 
-import model.EventLog;
 import model.Score;
 import model.ScoreRecord;
 
@@ -32,8 +31,6 @@ public class AvoidPoopGameWindow extends JFrame {
 
     // Constructs main window
     public AvoidPoopGameWindow() {
-        EventLog.getInstance().clear();
-
         avoidPoopGame = new AvoidPoopGame();
         avoidPoopGame.loadScoreRecord();
 
