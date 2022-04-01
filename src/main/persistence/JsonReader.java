@@ -28,7 +28,7 @@ public class JsonReader {
     }
 
     // EFFECTS: reads source file as string and returns it
-    private String readFile(String source) throws IOException {
+    public String readFile(String source) throws IOException {
         StringBuilder contentBuilder = new StringBuilder();
         try (Stream<String> stream = Files.lines(Paths.get(source), StandardCharsets.UTF_8)) {
             stream.forEach(s -> contentBuilder.append(s));
@@ -38,7 +38,8 @@ public class JsonReader {
 
     // EFFECTS: parses score record from JSON object and returns it
     private ScoreRecord parseScoreRecord(JSONObject jsonObject) {
-        ScoreRecord scoreRecord = new ScoreRecord();
+        String name = jsonObject.getString("name");
+        ScoreRecord scoreRecord = new ScoreRecord(name);
         addScoreRecord(scoreRecord, jsonObject);
         return scoreRecord;
     }

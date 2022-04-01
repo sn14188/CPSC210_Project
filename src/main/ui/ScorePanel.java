@@ -17,7 +17,7 @@ public class ScorePanel extends JPanel {
         setBackground(new Color(0, 150, 200));
         scoreLabel = new JLabel("TURN COUNT: " + avoidPoopGame.getTurnCount());
         scoreLabel.setPreferredSize(new Dimension(WIDTH, HEIGHT));
-        add(scoreLabel);
+        this.add(scoreLabel);
     }
 
     // MODIFIES: this

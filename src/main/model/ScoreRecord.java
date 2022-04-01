@@ -3,15 +3,23 @@ package model;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.ArrayList;
 
-// Represents score records
+// Represents score records having a collection of scores
 public class ScoreRecord {
-    private ArrayList<Score> scores;
+    private String name;
+    private List<Score> scores;
 
     // EFFECTS: constructs a score record with score values
-    public ScoreRecord() {
+    public ScoreRecord(String name) {
+        this.name = name;
         scores = new ArrayList<>();
+    }
+
+    public List<Score> getScoreRecord() {
+        return Collections.unmodifiableList(scores);
     }
 
     // MODIFIES: this
@@ -20,13 +28,10 @@ public class ScoreRecord {
         scores.add(score);
     }
 
-    public ArrayList<Score> getScoreRecord() {
-        return scores;
-    }
-
     // EFFECTS: returns this as JSON object
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
+        json.put("name", name);
         json.put("Scores", scoreRecordToJson());
         return json;
     }

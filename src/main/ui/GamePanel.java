@@ -13,29 +13,26 @@ public class GamePanel extends JPanel {
     // Constructs a score panel
     // EFFECTS: sets up the white panel with game's size
     public GamePanel(AvoidPoopGame avoidPoopGame) {
+        this.avoidPoopGame = avoidPoopGame;
         setBackground(Color.WHITE);
         setPreferredSize(new Dimension(AvoidPoopGame.WIDTH, AvoidPoopGame.HEIGHT));
-        this.avoidPoopGame = avoidPoopGame;
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         drawGame(g);
-        if (avoidPoopGame.isGameOver()) {
-            drawGameOver(g);
-        }
     }
 
     // MODIFIES: g
-    // EFFECTS:  draws the game onto g
+    // EFFECTS: draws the game onto g
     private void drawGame(Graphics g) {
         drawPlayer(g);
         drawPoops(g);
     }
 
     // MODIFIES: g
-    // EFFECTS:  draws the player onto g
+    // EFFECTS: draws the player onto g
     private void drawPlayer(Graphics g) {
         Player player = avoidPoopGame.getPlayer();
         g.setColor(Player.COLOR);
@@ -62,33 +59,4 @@ public class GamePanel extends JPanel {
                 Poop.POOP_SIZE_X,
                 Poop.POOP_SIZE_Y);
     }
-
-    // Draws the "game over" message and save instructions
-    // MODIFIES: g
-    // EFFECTS:  draws "game over" and save instructions onto g
-    private void drawGameOver(Graphics g) {
-        g.setColor(new Color(200, 0, 0));
-        g.setFont(new Font("Arial", 20, 15));
-        FontMetrics fm = g.getFontMetrics();
-        centreString("Game over. You've been pooped.", g, fm, AvoidPoopGame.HEIGHT / 2 - 10);
-        centreString("S to save score.", g, fm, AvoidPoopGame.HEIGHT / 2 + 10);
-    }
-
-    // MODIFIES: g
-    // EFFECTS:  draws the message that requires name onto g
-    private void drawSaveScore(Graphics g) {
-        g.setColor(new Color(200, 0, 0));
-        g.setFont(new Font("Arial", 20, 15));
-        FontMetrics fm = g.getFontMetrics();
-        centreString("Input your name.", g, fm, AvoidPoopGame.HEIGHT / 2);
-    }
-
-    // Centres a string on the screen
-    // modifies: g
-    // effects:  centres the string horizontally onto g at vertical position y
-    private void centreString(String str, Graphics g, FontMetrics fm, int y) {
-        int width = fm.stringWidth(str);
-        g.drawString(str, (AvoidPoopGame.WIDTH - width) / 2, y);
-    }
 }
-

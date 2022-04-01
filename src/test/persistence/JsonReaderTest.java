@@ -1,5 +1,3 @@
-// Work cited: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
-
 package persistence;
 
 import model.ScoreRecord;
@@ -28,7 +26,7 @@ class JsonReaderTest {
         try {
             ScoreRecord scoreRecord = reader.read();
             assertEquals("Aiden", scoreRecord.getScoreRecord().get(0).getName());
-            assertEquals(100, scoreRecord.getScoreRecord().get(0).getScore());
+            assertEquals(25, scoreRecord.getScoreRecord().get(0).getScore());
         } catch (IOException e) {
             fail("Couldn't read from file");
         }

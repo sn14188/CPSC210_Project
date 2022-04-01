@@ -1,6 +1,8 @@
 package ui;
 
-import model.*;
+import model.Player;
+import model.Poop;
+import model.Score;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
@@ -8,7 +10,7 @@ import java.awt.event.KeyEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.List;
 
 // Represents avoid poop game
 public class AvoidPoopGame {
@@ -16,20 +18,17 @@ public class AvoidPoopGame {
     public static final int HEIGHT = 500; // vertical size of field
 
     private Player player;
-    private ArrayList<Poop> poops;
+    private List<Poop> poops;
     private int turnCount; // turn count
     private boolean gameOver = false; // false until the game is over
-    private Scanner input;
 
     // Data persistence
-    private ScoreRecord scoreRecord;
     private static final String JSON_STORE = "./data/record.json";
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
 
     // EFFECTS: constructs a game
     public AvoidPoopGame() {
-        scoreRecord = new ScoreRecord();
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
 
@@ -42,7 +41,7 @@ public class AvoidPoopGame {
         return player;
     }
 
-    public ArrayList<Poop> getPoops() {
+    public List<Poop> getPoops() {
         return poops;
     }
 
@@ -87,19 +86,23 @@ public class AvoidPoopGame {
             player.moveLeft();
         } else if (keyCode == KeyEvent.VK_KP_RIGHT || keyCode == KeyEvent.VK_RIGHT) {
             player.moveRight();
-        } else if (keyCode == KeyEvent.VK_S) {
-            saveScoreRecord();
         } else if (keyCode == KeyEvent.VK_X) {
             System.exit(0);
         }
     }
 
+    // EFFECTS: prompts user to input name and saves the score
+    public void addScoreWithName() {
+        AvoidPoopGameWindow.getScoreRecord().addScore(new Score(AvoidPoopGameWindow.getTextField().getText(),
+                turnCount));
+        saveScoreRecord();
+    }
+
     // EFFECTS: saves the score record to file
     public void saveScoreRecord() {
-        saveScoreWithName();
         try {
             jsonWriter.open();
-            jsonWriter.write(scoreRecord);
+            jsonWriter.write(AvoidPoopGameWindow.getScoreRecord());
             jsonWriter.close();
             System.out.println("Saved to: " + JSON_STORE);
         } catch (FileNotFoundException e) {
@@ -108,19 +111,11 @@ public class AvoidPoopGame {
         System.exit(0);
     }
 
-    // EFFECTS: prompts user to input name and saves the score
-    public void saveScoreWithName() {
-        System.out.println("Input your name: ");
-        input = new Scanner(System.in);
-        String name = input.next();
-        scoreRecord.addScore(new Score(name, turnCount));
-    }
-
     // MODIFIES: this
     // EFFECTS: loads score record from file
     public void loadScoreRecord() {
         try {
-            scoreRecord = jsonReader.read();
+            AvoidPoopGameWindow.setScoreRecord(jsonReader.read());
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);
         }

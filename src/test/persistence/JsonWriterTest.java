@@ -1,5 +1,3 @@
-// Work cited: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
-
 package persistence;
 
 import model.Score;
@@ -16,7 +14,7 @@ class JsonWriterTest extends JsonTest {
     @Test
     void testWriterInvalidFile() {
         try {
-            ScoreRecord scoreRecord = new ScoreRecord();
+            ScoreRecord scoreRecord = new ScoreRecord("");
             JsonWriter writer = new JsonWriter("./data/a\0impossible:fileName.json");
             writer.open();
         } catch (IOException e) {
@@ -27,7 +25,7 @@ class JsonWriterTest extends JsonTest {
     @Test
     void testWriteEmptyScoreRecord() {
         try {
-            ScoreRecord scoreRecord = new ScoreRecord();
+            ScoreRecord scoreRecord = new ScoreRecord("");
             JsonWriter writer = new JsonWriter("./data/testWriterEmptyScoreRecord.json");
             writer.open();
             writer.write(scoreRecord);
@@ -44,7 +42,7 @@ class JsonWriterTest extends JsonTest {
     @Test
     void testWriteGeneralScoreRecord() {
         try {
-            ScoreRecord scoreRecord = new ScoreRecord();
+            ScoreRecord scoreRecord = new ScoreRecord("");
             scoreRecord.addScore(new Score("Kelly", 10));
             scoreRecord.addScore(new Score("Rena", 5));
             JsonWriter writer = new JsonWriter("./data/testWriterGeneralScoreRecord.json");
