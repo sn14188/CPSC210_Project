@@ -3,6 +3,7 @@
 
 package ui;
 
+import model.EventLog;
 import model.Score;
 import model.ScoreRecord;
 
@@ -22,7 +23,6 @@ public class AvoidPoopGameWindow extends JFrame {
     private ScorePanel scorePanel;
     private static JTextField textField = new JTextField();
 
-
     private Timer timer;
     private static final int INTERVAL = 50;
 
@@ -32,6 +32,8 @@ public class AvoidPoopGameWindow extends JFrame {
 
     // Constructs main window
     public AvoidPoopGameWindow() {
+        EventLog.getInstance().clear();
+
         avoidPoopGame = new AvoidPoopGame();
         avoidPoopGame.loadScoreRecord();
 

@@ -39,6 +39,7 @@ public class Player {
         if (playerX <= 0) {
             playerX = 0;
         } else {
+            EventLog.getInstance().logEvent(new Event("Player moved left."));
             this.setPlayerX(this.playerX - 10);
         }
     }
@@ -49,6 +50,7 @@ public class Player {
         if (playerX >= AvoidPoopGame.WIDTH) {
             playerX = AvoidPoopGame.WIDTH;
         } else {
+            EventLog.getInstance().logEvent(new Event("Player moved right."));
             this.setPlayerX(this.playerX + 10);
         }
     }

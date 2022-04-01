@@ -25,7 +25,9 @@ public class ScoreRecord {
     // MODIFIES: this
     // EFFECTS: adds a score to the list
     public void addScore(Score score) {
+        EventLog.getInstance().logEvent(new Event("Added score: " + score.getName() + " " + score.getScore()));
         scores.add(score);
+
     }
 
     // EFFECTS: returns this as JSON object

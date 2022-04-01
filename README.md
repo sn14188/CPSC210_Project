@@ -25,3 +25,76 @@ This reminded me of a mobile game **avoid poop falling from the sky** that I use
 >- As a user, I want to be able to increase my score until the player object is hit by a poop object.
 >- As a user, I want to be able to see my current score as the game is running.
 >- As a user, I want to be prompted with the option to save my score at the end of the game.
+
+## Phase 4: Task 2
+Saved to: ./data/record.json
+Fri Apr 01 02:24:03 PDT 2022
+Event log cleared.
+Fri Apr 01 02:24:07 PDT 2022
+Player moved left.
+Fri Apr 01 02:24:07 PDT 2022
+Player moved left.
+Fri Apr 01 02:24:08 PDT 2022
+Player moved left.
+Fri Apr 01 02:24:08 PDT 2022
+Player moved left.
+Fri Apr 01 02:24:09 PDT 2022
+Player moved right.
+Fri Apr 01 02:24:09 PDT 2022
+Player moved right.
+Fri Apr 01 02:24:10 PDT 2022
+Player moved left.
+Fri Apr 01 02:24:10 PDT 2022
+Player moved left.
+Fri Apr 01 02:24:10 PDT 2022
+Player moved left.
+Fri Apr 01 02:24:10 PDT 2022
+Player moved right.
+Fri Apr 01 02:24:10 PDT 2022
+Player moved right.
+Fri Apr 01 02:24:11 PDT 2022
+Player moved right.
+Fri Apr 01 02:24:11 PDT 2022
+Player moved left.
+Fri Apr 01 02:24:11 PDT 2022
+Player moved left.
+Fri Apr 01 02:24:11 PDT 2022
+Player moved left.
+Fri Apr 01 02:24:11 PDT 2022
+Player moved right.
+Fri Apr 01 02:24:12 PDT 2022
+Player moved right.
+Fri Apr 01 02:24:12 PDT 2022
+Player moved left.
+Fri Apr 01 02:24:12 PDT 2022
+Player moved left.
+Fri Apr 01 02:24:13 PDT 2022
+Player moved left.
+Fri Apr 01 02:24:13 PDT 2022
+Player moved left.
+Fri Apr 01 02:24:14 PDT 2022
+Player moved right.
+Fri Apr 01 02:24:14 PDT 2022
+Player moved left.
+Fri Apr 01 02:24:15 PDT 2022
+Player moved right.
+Fri Apr 01 02:24:15 PDT 2022
+Player moved left.
+Fri Apr 01 02:24:15 PDT 2022
+Player moved left.
+Fri Apr 01 02:24:15 PDT 2022
+Player moved right.
+Fri Apr 01 02:24:16 PDT 2022
+Player moved right.
+Fri Apr 01 02:24:16 PDT 2022
+Player moved right.
+Fri Apr 01 02:24:16 PDT 2022
+Player moved right.
+Fri Apr 01 02:24:16 PDT 2022
+Player moved right.
+Fri Apr 01 02:24:18 PDT 2022
+Player moved left.
+Fri Apr 01 02:24:21 PDT 2022
+Added score: Aiden 231
+
+Process finished with exit code 0

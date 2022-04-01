@@ -1,8 +1,6 @@
 package ui;
 
-import model.Player;
-import model.Poop;
-import model.Score;
+import model.*;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
@@ -108,6 +106,11 @@ public class AvoidPoopGame {
         } catch (FileNotFoundException e) {
             System.out.println("Unable to write to file: " + JSON_STORE);
         }
+
+        for (Event event : EventLog.getInstance()) {
+            System.out.println(event);
+        }
+
         System.exit(0);
     }
 
